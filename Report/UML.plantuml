@@ -3,7 +3,7 @@
 skinparam SequenceMessageAlign center
 
 == STARTUP ==
-Server -> Client : Bind (port)
+Client -> Server : Bind (port)
 == LOOP ==
 Client -> Server : get <filename> (Richiesta DOWNLOAD)
 Server -> Client : Messaggio di Risposta contenente il file desiderato \n (Oppure errore nel caso il file non sia presente)
