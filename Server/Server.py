@@ -6,6 +6,7 @@ from sys import *
 import threading
 
 def commands(request, server, address):
+    eof="".encode()
     if request.decode()=="list":
         print("List of files requested by client:")
         files=os.listdir()
@@ -18,37 +19,33 @@ def commands(request, server, address):
             print("List of files sent.")
 
     elif request.decode().startswith("get"):
-        print("File requested by client:")
-        file=request.decode().split(" ")[1]
-        if os.path.isfile(file):
+        if os.path.exists(request.decode().split(" ")[1]) and request.decode().split(" ")[1]!="Server.py":
             server.sendto("exist".encode(), address)
             print("Sending file...")
-            with open(file, "rb") as f:
-                for line in f:
-                    server.sendto(line, address)
-                server.sendto("".encode(), address)
+            file=open(request.decode().split(" ")[1], "rb")
+            data=file.read(1024)
+            while data:
+                server.sendto(data, address)
+                data=file.read(1024)
+            file.close()
             print("File sent.")
         else:
-            server.sendto("not exist".encode(), address)
             print("File not found.")
-    
-
+            server.sendto("error".encode(), address)
 
     elif request.decode().startswith("put"):
-        print("Initializing Upload File:")
-        file=request.decode().split(" ")[1]
-        print("Receiving file...")
-        with open(file, "wb") as f:
-            while True:
-                data=server.recvfrom(1024)
-                if data[0]=="":
-                    break
-                f.write(data[0])
-        print("File received.")
-
-
-
-
+        file, address = server.recvfrom(1024)
+        if file.decode()!="exist":
+            print("File not found")
+        else:
+            file=open(request.decode().split(" ")[1], "wb")
+            server.settimeout(3)
+            try:
+                while True:
+                    data, address = server.recvfrom(1024)
+                    file.write(data)
+            except timeout:
+                print("\n")
 
 
 if __name__ == "__main__":
