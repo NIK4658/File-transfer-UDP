@@ -1,0 +1,5 @@
+.DS_Store
+/Client/*
+/Server/*
+!/Client/Client.py
+!/Server/Server.py
