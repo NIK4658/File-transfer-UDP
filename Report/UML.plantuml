@@ -1,0 +1,17 @@
+@startuml UDP-Communication
+!theme plain
+skinparam SequenceMessageAlign center
+
+== STARTUP ==
+Server -> Client : Bind (port)
+== LOOP ==
+Client -> Server : get <filename> (Richiesta DOWNLOAD)
+Server -> Client : Messaggio di Risposta contenente il file desiderato \n (Oppure errore nel caso il file non sia presente)
+== LOOP ==
+Client -> Server : put <filename> (Richiesta UPLOAD)
+Server -> Client : Esito dell’operazione di UPLOAD da parte del Client verso il Server
+== LOOP ==
+Client -> Server : List
+Server -> Client : Lista dei file presenti sul Server
+
+@enduml
