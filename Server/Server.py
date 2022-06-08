@@ -17,6 +17,8 @@ def commands(request, server, address):
                 if(file!="Server.py"):
                     server.sendto(file.encode(), address)
             print("List of files sent.")
+        else:
+            print("No files in the server.")
 
     elif request.decode().startswith("get"):
         if os.path.exists(request.decode().split(" ")[1]) and request.decode().split(" ")[1]!="Server.py":
@@ -38,6 +40,7 @@ def commands(request, server, address):
         if file.decode()!="exist":
             print("File not found")
         else:
+            print("Receiving file...")
             file=open(request.decode().split(" ")[1], "wb")
             server.settimeout(3)
             try:
@@ -45,6 +48,7 @@ def commands(request, server, address):
                     data, address = server.recvfrom(1024)
                     file.write(data)
             except timeout:
+                print("File received.")
                 print("\n")
 
 
