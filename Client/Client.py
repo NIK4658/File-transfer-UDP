@@ -53,7 +53,6 @@ def put(client, file, address):
         print("File sent.")
     else:
         print("File not found.")
-        client.sendto("error".encode(), address)
 
 
 

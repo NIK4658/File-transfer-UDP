@@ -37,19 +37,16 @@ def commands(request, server, address):
 
     elif request.decode().startswith("put"):
         file, address = server.recvfrom(1024)
-        if file.decode()!="exist":
-            print("File not found")
-        else:
-            print("Receiving file...")
-            file=open(request.decode().split(" ")[1], "wb")
-            server.settimeout(3)
-            try:
-                while True:
-                    data, address = server.recvfrom(1024)
-                    file.write(data)
-            except timeout:
-                print("File received.")
-                print("\n")
+        print("Receiving file...")
+        file=open(request.decode().split(" ")[1], "wb")
+        server.settimeout(3)
+        try:
+            while True:
+                data, address = server.recvfrom(1024)
+                file.write(data)
+        except timeout:
+            print("File received.")
+            print("\n")
 
 
 if __name__ == "__main__":
