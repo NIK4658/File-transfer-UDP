@@ -1,10 +1,20 @@
-# File-Transfer-UDP
+# File-Transfer-UDP 🌐 ![StatusBadge](https://badgen.net/badge/Status/Completed/green)
+### *File Exchanger using UDP protocol.*
 
-How to use this program:
+___
 
-* Run both Client.py and Server.py.
+## **USAGE:**
+ 1. Run **one instance** of *Server.py*.
+ 2. Run **as many instances** as you want of *Client.py*.
+ 
+___
 
-Through the Client you can use these commands:
-* list : Send a request to the server for a list containing the names of the files available for download.
-* get < filename > : Submit a DOWNLOAD request for a specific file.
-* put < filename > : Submit an UPLOAD Request for a specific file.
+### **COMMANDS AVAIABLE**
+
+*Use this command through the Client instance*
+
+- ***list*** : Send a request to the server for a **list** containing the names of the files *available for download*.
+- ***get < filename >*** : Submit a **DOWNLOAD** request for a specific file.
+- ***put < filename >*** : Submit an **UPLOAD** Request for a specific file.
+
+___
