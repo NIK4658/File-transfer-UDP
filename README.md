@@ -13,7 +13,7 @@ ___
 
 *Use this command through the Client instance*
 
-- ***list*** : Send a request to the server for a **list** containing the names of the files *available for download*.
+- ***list*** : Send a request to the server for a **list** containing the names of the files **available for download**.
 - ***get < filename >*** : Submit a **DOWNLOAD** request for a specific file.
 - ***put < filename >*** : Submit an **UPLOAD** Request for a specific file.
 
